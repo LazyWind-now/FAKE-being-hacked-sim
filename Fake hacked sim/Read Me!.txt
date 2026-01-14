@@ -1,0 +1,82 @@
+FAKE HACK SIMULATOR
+by Lazy Wind
+
+────────────────────────────────────
+
+WHAT IS THIS?
+
+This is a scripted VISUAL HACKING SIMULATION for Windows.
+It is designed to look like a full system breach and escalation sequence.
+
+Nothing shown is real.
+The effects are intentional.
+
+────────────────────────────────────
+
+PLATFORM
+
+• WINDOWS ONLY
+• Built for Windows Command Prompt (.bat)
+• Not compatible with macOS or Linux
+
+────────────────────────────────────
+
+WHAT IT DOES
+
+• Displays fake security alerts and system logs
+• Runs a real-time countdown with a progress bar
+• Shows escalating warning messages and popups
+• Enters a final panic loop
+• ALWAYS shuts down the computer at the end
+
+Once started, the sequence is meant to complete.
+
+────────────────────────────────────
+
+WHAT IT DOES NOT DO
+
+• No real hacking
+• No data theft
+• No internet access
+• No malware installation
+• No persistence after shutdown
+
+This is a simulation with dramatic effects only.
+
+────────────────────────────────────
+
+IMPORTANT USE NOTICE
+
+This program is INTENTIONALLY disruptive.
+
+Run it ONLY:
+• On your own computer
+• Or on a system where shutdown is acceptable
+• With full permission from the owner
+
+Do NOT use this to threaten, harass, or deceive people into thinking they are actually compromised.
+
+────────────────────────────────────
+
+HOW TO STOP IT
+
+• You generally cannot stop it once it has started
+• Closing the window or pressing CTRL + C may NOT prevent shutdown
+• The safest way to stop it is to NOT run it
+
+Advanced users may edit the file beforehand to remove or comment out the shutdown command.
+
+────────────────────────────────────
+
+DISCLAIMER
+
+This project is for entertainment and visual effect only.
+The creator (Lazy Wind) is not responsible for misuse or data loss due to shutdown.
+
+You chose to run it.
+You were warned.
+
+────────────────────────────────────
+
+“It’s not hacking.
+It’s commitment.”
