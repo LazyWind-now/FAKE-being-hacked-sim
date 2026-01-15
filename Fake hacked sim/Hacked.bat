@@ -7,8 +7,8 @@ color 0c
 set total=300
 set seconds=300
 
-:: shutdown turned off
-:: shutdown /s /t 320
+:: shutdown turned on
+shutdown /s /t 320
 
 :loop
 cls
@@ -112,6 +112,12 @@ timeout /t 1 >nul
 echo 1
 timeout /t 1 >nul
 
+color 0a
+echo
+echo ==================================================================================
+echo                     SELF DESTRUCT SEQUENCE ACTIVATED 
+echo ==================================================================================
+echo
 
 :end
 cls
@@ -120,3 +126,4 @@ color 0a
 :panic
 msg * I  K N O W   W H E R E   Y O U   L I V E
 goto panic
+
