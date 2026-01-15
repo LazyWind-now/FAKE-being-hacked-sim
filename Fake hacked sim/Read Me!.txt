@@ -1,82 +1,37 @@
-FAKE HACK SIMULATOR
-by Lazy Wind
+# FAKE-being-hacked-sim
 
-────────────────────────────────────
+WARNING — DO NOT RUN ANY SCRIPTS FROM THIS REPOSITORY ON A MACHINE YOU CARE ABOUT.
 
-WHAT IS THIS?
+This repository is a demonstration/simulation created by lazyWind that shows how a "being hacked" scenario could be simulated by initiating a system shutdown. It is intended for educational and testing purposes only.
 
-This is a scripted VISUAL HACKING SIMULATION for Windows.
-It is designed to look like a full system breach and escalation sequence.
+## Purpose
+- Demonstrate a simulated shutdown trigger for education, demos, or testing.
+- Provide a safe example to inspect how a shutdown command might be invoked by code.
 
-Nothing shown is real.
-The effects are intentional.
+## Important: What this project DOES
+- If executed, one or more scripts in this repository are designed to initiate a system shutdown or power-off on the host machine.
+- Running those scripts will cause the machine to power off, which can interrupt work and may lead to loss of unsaved data.
 
-────────────────────────────────────
+## Important: What this project DOES NOT
+- This repository is a simulation and is not intended to copy, exfiltrate, modify, or transmit your personal files or data.
+- There is no included code whose purpose is to collect, send, or steal data from your machine. However, you must still exercise caution — do not run anything here on systems that contain important data.
 
-PLATFORM
+## Safety recommendations
+- Do not run any files from this repository on production machines, primary devices, or any machine with important data.
+- To inspect or test the contents safely, use an isolated, disposable environment such as a virtual machine (VM), container, or sandbox with no network access and no valuable data.
+- Prefer static inspection (open files in a text editor), code review, and automated static analysis tools before running anything.
+- Back up any important data before experimenting in environments that are not disposable.
 
-• WINDOWS ONLY
-• Built for Windows Command Prompt (.bat)
-• Not compatible with macOS or Linux
+## Affected systems
+- Shutdown behavior may affect Windows, macOS, Linux, and other platforms depending on the script. Do not assume any platform is safe.
 
-────────────────────────────────────
+## Creator
+- Created by lazyWind (GitHub: LazyWind-now).
 
-WHAT IT DOES
+## Liability and acceptance of risk
+BY USING OR EXECUTING ANYTHING IN THIS REPOSITORY, YOU ACCEPT FULL RESPONSIBILITY FOR ANY CONSEQUENCES. The creator (lazyWind) and contributors DISCLAIM ALL LIABILITY for any damage, data loss, or other negative effects that result from the use or misuse of the contents of this repository. This project is provided "as-is" with no warranties.
 
-• Displays fake security alerts and system logs
-• Runs a real-time countdown with a progress bar
-• Shows escalating warning messages and popups
-• Enters a final panic loop
-• ALWAYS shuts down the computer at the end
+If you do not accept these terms, do not run any code from this repository.
 
-Once started, the sequence is meant to complete.
-
-────────────────────────────────────
-
-WHAT IT DOES NOT DO
-
-• No real hacking
-• No data theft
-• No internet access
-• No malware installation
-• No persistence after shutdown
-
-This is a simulation with dramatic effects only.
-
-────────────────────────────────────
-
-IMPORTANT USE NOTICE
-
-This program is INTENTIONALLY disruptive.
-
-Run it ONLY:
-• On your own computer
-• Or on a system where shutdown is acceptable
-• With full permission from the owner
-
-Do NOT use this to threaten, harass, or deceive people into thinking they are actually compromised.
-
-────────────────────────────────────
-
-HOW TO STOP IT
-
-• You generally cannot stop it once it has started
-• Closing the window or pressing CTRL + C may NOT prevent shutdown
-• The safest way to stop it is to NOT run it
-
-Advanced users may edit the file beforehand to remove or comment out the shutdown command.
-
-────────────────────────────────────
-
-DISCLAIMER
-
-This project is for entertainment and visual effect only.
-The creator (Lazy Wind) is not responsible for misuse or data loss due to shutdown.
-
-You chose to run it.
-You were warned.
-
-────────────────────────────────────
-
-“It’s not hacking.
-It’s commitment.”
+## Questions or concerns
+If you're unsure about a file or what it does, open an issue or ask before running anything. If you want a safer, commented walkthrough of specific files, request it and inspect them only in a disposable environment.
