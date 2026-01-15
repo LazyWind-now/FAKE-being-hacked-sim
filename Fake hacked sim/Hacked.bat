@@ -10,8 +10,34 @@ set seconds=300
 :: shutdown turned on
 shutdown /s /t 320
 
+:: === enhancements (non-destructive helpers) ===
+:: LOGFILE: store all generated messages in TEMP for review
+set LOGFILE=%TEMP%\fake_hack_log_%random%.txt
+echo *** FAKE HACK SIM - LOG STARTED *** > "%LOGFILE%"
+echo Start: %date% %time% >> "%LOGFILE%"
+
+:: STOPFILE: create %TEMP%\STOP_HACK to abort (safe kill switch)
+set STOPFILE=%TEMP%\STOP_HACK
+
+:: POPUP helper path (we will drop a small VBS to temp when needed)
+set VBS_POPUP=%TEMP%\fake_popup_%random%.vbs
+
+:: Flags
+set POPUP_STARTED=0
+set LOGGED_START=0
+:: ============================================
+
 :loop
 cls
+
+:: allow a quick abort by creating the STOP file
+if exist "%STOPFILE%" (
+    echo STOP file detected: aborting simulation... >> "%LOGFILE%"
+    echo Aborting scheduled shutdown...
+    shutdown /a 2>nul
+    echo Shutdown aborted by STOP_HACK file. >> "%LOGFILE%"
+    goto abort_cleanup
+)
 
 :: CALCULATE PROGRESS (REAL)
 set /a percent=(total-seconds)*100/total
@@ -37,8 +63,8 @@ echo.
 echo [!bar!]
 echo.
 
-:: MORE REALISTIC LOGS
-set /a r=%random% %% 20
+:: MORE REALISTIC LOGS (expanded slightly, and append to LOGFILE)
+set /a r=%random% %% 26
 if %r%==0  echo [10:41:12] svchost.exe (PID 884) privilege escalation successful
 if %r%==1  echo [10:41:13] lsass.exe memory access granted
 if %r%==2  echo [10:41:14] outbound TLS connection established :443
@@ -59,6 +85,15 @@ if %r%==16 echo [10:41:28] SYSTEM shell confirmed
 if %r%==17 echo [10:41:29] network adapter enumerated
 if %r%==18 echo [10:41:30] active user sessions mapped
 if %r%==19 echo [10:41:31] forensic traces minimized
+if %r%==20 echo [10:41:32] exfiltration: samples.zip (partial)
+if %r%==21 echo [10:41:33] stolen credentials preview: user:demo pwd:********
+if %r%==22 echo [10:41:34] snapshot: desktop_01.png captured
+if %r%==23 echo [10:41:35] remote shell established: cmd.exe -> 10.10.10.5
+if %r%==24 echo [10:41:36] telemetry: 2.4MB queued for upload
+if %r%==25 echo [10:41:37] cleanup: traces obfuscated
+
+:: append whichever line gets printed to the logfile (non-destructive record)
+>> "%LOGFILE%" echo [%time%] %computername%: simulated event id %r% 
 
 echo.
 echo NOTICE: SYSTEM MAY APPEAR UNRESPONSIVE
@@ -71,8 +106,33 @@ if !seconds! LSS 120 if not defined WARNED (
     start "" /b msg * WARNING: SYSTEM COMPROMISED
 )
 
+:: ADD: spawn a harmless VBS popup storm once (non-blocking)
+if !seconds! LSS 110 if "!POPUP_STARTED!"=="0" (
+    set POPUP_STARTED=1
+    :: write a small vbs to temp and start it silently
+    > "%VBS_POPUP%" echo WScript.Sleep 1000
+    >> "%VBS_POPUP%" echo Set WshShell = CreateObject("WScript.Shell")
+    >> "%VBS_POPUP%" echo for i = 1 to 5
+    >> "%VBS_POPUP%" echo   WshShell.Popup "Security Alert: anomalous activity detected (simulated)", 3, "Security", 48
+    >> "%VBS_POPUP%" echo next
+    start "" /b cscript //NoLogo "%VBS_POPUP%"
+    >> "%LOGFILE%" echo [%time%] popup storm launched at %VBS_POPUP%
+)
+
 :: EXTRA PANIC MESSAGE AFTER 1 MINUTE
 if !seconds! LSS 60 echo !!! CRITICAL FAILURE IMMINENT !!!
+
+:: Additional theatrical corruption effect (character corruption)
+if !seconds! LEQ 180 (
+    set "line=SYSTEM STATUS: STABLE"
+    rem create a simple visual corruption by replacing letters randomly (non-destructive)
+    set /a c=%random% %% 5
+    if !c! GTR 2 (
+        call :corrupt "!line!"
+    ) else (
+        echo !line!
+    )
+)
 
 :: WHEN TIMER HITS ZERO -> GO TO PANIC
 if !seconds! LEQ 0 goto panic
@@ -80,6 +140,35 @@ if !seconds! LEQ 0 goto panic
 set /a seconds-=1
 timeout /t 1 >nul
 goto loop
+
+:corrupt
+setlocal enabledelayedexpansion
+set s=%~1
+set out=
+for /L %%i in (0,1,19) do (
+  set /a idx=%random% %% 10
+  set char=!s:~%%i,1!
+  if "!char!"=="" goto :donechar
+  if !idx! GTR 6 (
+    set out=!out!^%
+    set out=!out!*
+  ) else (
+    set out=!out!!char!
+  )
+)
+:donechar
+echo !out!
+endlocal
+goto :eof
+
+:abort_cleanup
+echo Cleanup after abort... >> "%LOGFILE%"
+:: optional cleanup: delete temp vbs if present
+if exist "%VBS_POPUP%" del "%VBS_POPUP%" 2>nul
+echo Aborted at %date% %time% >> "%LOGFILE%"
+echo Simulation aborted. Press any key to exit.
+pause >nul
+exit /b 0
 
 :end
 cls
@@ -119,5 +208,3 @@ color 0a
 :panic
 msg * I  K N O W   W H E R E   Y O U   L I V E
 goto panic
-
-
