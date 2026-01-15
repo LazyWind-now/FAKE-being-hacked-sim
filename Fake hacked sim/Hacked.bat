@@ -112,13 +112,6 @@ timeout /t 1 >nul
 echo 1
 timeout /t 1 >nul
 
-color 0a
-echo
-echo ==================================================================================
-echo                     SELF DESTRUCT SEQUENCE ACTIVATED 
-echo ==================================================================================
-echo
-
 :end
 cls
 color 0a
@@ -126,4 +119,5 @@ color 0a
 :panic
 msg * I  K N O W   W H E R E   Y O U   L I V E
 goto panic
+
 
